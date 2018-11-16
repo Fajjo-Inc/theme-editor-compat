@@ -1,6 +1,6 @@
 <?php
-require_once get_template_directory() . '/editor/class-tgm-plugin-activation.php';
-require_once get_template_directory() . '/editor/class-imagely-editor-pure-helpers.php';
+require_once 'class-tgm-plugin-activation.php';
+require_once 'class-imagely-editor-pure-helpers.php';
 
 if (!class_exists('Imagely_Editor')) {
 
@@ -70,6 +70,17 @@ if (!class_exists('Imagely_Editor')) {
             global $wp_version;
             return ( version_compare( $wp_version, '4.9.9', '>=' ) );
         }
+
+        function is_vc_problematic()
+        {
+            return WPB_VC_VERSION && version_compare(WPB_VC_VERSION, '5.1.1.2', '<=');
+        }
+
+
+        function does_need_classic_editor($post)
+        {
+            return $this->pure->has_tesla_page_builder_content($post) || ($this->pure->has_vc_content($post) && $this->is_vc_problematic());
+        }
     
         /**
          * Forces the classic editor as an option, rather than replace Gutenberg
@@ -102,7 +113,7 @@ if (!class_exists('Imagely_Editor')) {
         function get_edit_post_link($prev_link, $post_id)
         {
             if (($post = get_post($post_id))) {
-                return $this->pure->has_page_builder_content($post) // ?
+                return $this->does_need_classic_editor($post) // ?
                     ? $this->pure->to_classic_edit_url($prev_link)
                     : $prev_link;	
             }
@@ -122,7 +133,7 @@ if (!class_exists('Imagely_Editor')) {
         {
             global $post;
     
-            if ($post && $this->pure->has_page_builder_content($post)) {// ?
+            if ($post && $this->does_need_classic_editor($post)) {// ?
                 $node_id 	= 'classic-editor';
                 $node 		= $admin_bar->get_node($node_id);
                 $node->href = $this->pure->to_classic_edit_url($node->href);

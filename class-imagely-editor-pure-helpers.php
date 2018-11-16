@@ -13,9 +13,17 @@ if (!class_exists('Imagely_Editor_Pure_Helpers')) {
          * @param WP_Post $post
          * @return bool
          */
-        public function has_page_builder_content($post)
+        public function has_tesla_page_builder_content($post)
         {
             return stripos($post->post_content, '[efcb-section-') !== FALSE;
+        }
+
+        /**
+         * Determines if a post has VC content
+         */
+        public function has_vc_content($post)
+        {
+            return stripos($post->post_content, '[vc_') !== false;
         }
 
         /**
@@ -26,7 +34,9 @@ if (!class_exists('Imagely_Editor_Pure_Helpers')) {
          */
         public function to_classic_edit_url($url)
         {
-            return add_query_arg($url, 'classic-editor', '', $url);
+            return (strpos($url, 'classic-editor') !== FALSE)
+                ? $url
+                : add_query_arg($url, 'classic-editor', '', $url);
         }
 
         /**
