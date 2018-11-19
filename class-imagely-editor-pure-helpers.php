@@ -36,7 +36,7 @@ if (!class_exists('Imagely_Editor_Pure_Helpers')) {
         {
             return (strpos($url, 'classic-editor') !== FALSE)
                 ? $url
-                : add_query_arg($url, 'classic-editor', '', $url);
+                : add_query_arg('classic-editor', '', $url);
         }
 
         /**
