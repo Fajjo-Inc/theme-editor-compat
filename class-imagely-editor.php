@@ -15,7 +15,7 @@ if (!class_exists('Imagely_Editor')) {
         {
             $this->pure = new Imagely_Editor_Pure_Helpers;
     
-            update_option('classic-editor-replace', 'no-replace');
+            update_option('classic-editor-replace', 'classic');
     
             $this->add_hooks();
         }
