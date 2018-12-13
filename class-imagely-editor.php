@@ -13,7 +13,7 @@ if (!class_exists('Imagely_Editor')) {
     
         function __construct()
         {
-            $this->pure = new Imagely_Editor_Pure_Helpers;
+            $this->pure = new Imagely_Editor_Pure_Helpers;    
             $this->add_hooks();
         }
     
