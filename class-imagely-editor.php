@@ -14,9 +14,6 @@ if (!class_exists('Imagely_Editor')) {
         function __construct()
         {
             $this->pure = new Imagely_Editor_Pure_Helpers;
-    
-            update_option('classic-editor-replace', 'no-replace');
-    
             $this->add_hooks();
         }
     
@@ -25,11 +22,30 @@ if (!class_exists('Imagely_Editor')) {
             if ($this->is_classic_plugin_required()) {
                 add_action( 'tgmpa_register', array($this, 'register_required_plugins') );
                 add_action( 'admin_bar_menu', array($this, 'admin_bar'), PHP_INT_MAX-1 );
+                add_action( 'admin_init', array($this, 'fix_classic_editor_option') );
             }
     
             if ($this->has_gutenberg_plugin() || $this->has_block_editor()) {
                 add_filter( 'get_edit_post_link', array($this, 'get_edit_post_link'), PHP_INT_MAX-1, 2 );
                 add_action( 'admin_enqueue_scripts', array($this, 'hide_page_builder'));
+            }
+        }
+
+        function fix_classic_editor_option()
+        {
+            // We used to previously set the "classic-editor-replace" option
+            // to "no-replace".
+            //
+            // That option has changed it's implementation since, and its now best
+            // to not set any option at all as having it set to "no-replace" causes
+            // problems.
+            //
+            if (class_exists('Classic_Editor')) {
+                $klass = new ReflectionClass('Classic_Editor');
+                $version = $klass->getConstant('plugin_version');
+                if (version_compare($version, "0.5") > 0) {
+                    update_option('classic-editor-replace', 'block');
+                }
             }
         }
     
@@ -80,14 +96,6 @@ if (!class_exists('Imagely_Editor')) {
         function does_need_classic_editor($post)
         {
             return $this->pure->has_tesla_page_builder_content($post) || ($this->pure->has_vc_content($post) && $this->is_vc_problematic());
-        }
-    
-        /**
-         * Forces the classic editor as an option, rather than replace Gutenberg
-         */
-        function force_classic_editor_option()
-        {  
-            return 'no-replace';
         }
     
         /**
