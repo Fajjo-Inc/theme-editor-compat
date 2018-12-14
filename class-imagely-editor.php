@@ -144,10 +144,12 @@ if (!class_exists('Imagely_Editor')) {
             if ($post && $this->does_need_classic_editor($post)) {// ?
                 $node_id 	= 'classic-editor';
                 $node 		= $admin_bar->get_node($node_id);
-                $node->href = $this->pure->to_classic_edit_url($node->href);
-                $node->title = __('Edit');
-                $admin_bar->remove_node($node_id);
-                $admin_bar->add_node($node);
+                if ($node) {
+                    $node->href = $this->pure->to_classic_edit_url($node->href);
+                    $node->title = __('Edit');
+                    $admin_bar->remove_node($node_id);
+                    $admin_bar->add_node($node);
+                }
             }
     
             return $admin_bar;
