@@ -263,5 +263,3 @@ class Loader
         \tgmpa( $plugins, $config );
     }
 }
-
-new Loader;
