@@ -2,7 +2,7 @@
 
 namespace ReactrIO\Editor\Compat;
 
-require_once 'class-tgm-plugin-activation.php';
+require_once 'lib/class-tgm-plugin-activation.php';
 
 class Loader
 {
