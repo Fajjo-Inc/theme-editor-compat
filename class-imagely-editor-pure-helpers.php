@@ -1,11 +1,13 @@
 <?php
 
-if (!class_exists('Imagely_Editor_Pure_Helpers')) {
+namespace ReactrIO\Editor\Compat;
+
+if (!class_exists('Helpers')) {
 
     /**
      * Pure functions used for manipulating the editor
      */
-    class Imagely_Editor_Pure_Helpers
+    class Helpers
     {
         /**
          * Determines if a post has page builder content

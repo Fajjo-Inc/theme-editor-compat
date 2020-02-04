@@ -7,13 +7,13 @@ if (!class_exists('Imagely_Editor')) {
     class Imagely_Editor
     {
         /**
-         * @var Imagely_Editor_Pure_Helpers $pure
+         * @var Helpers $pure
          */
         public $pure;
     
         function __construct()
         {
-            $this->pure = new Imagely_Editor_Pure_Helpers;    
+            $this->pure = new \ReactrIO\Editor\Compat\Helpers;    
             $this->add_hooks();
         }
     
