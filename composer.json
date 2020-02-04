@@ -8,5 +8,10 @@
             "email": "mweichert@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ReactrIO\\Editor\\Compat": "./php-src"
+        }
+    }
 }
