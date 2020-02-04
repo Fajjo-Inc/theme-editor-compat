@@ -1,0 +1,12 @@
+{
+    "name": "reactr-io/theme-editor-compat",
+    "description": "This is a dependency for the legacy Showthemes and Teslathemes codebases. This library will detect if a legacy page builder was used, and if so, to open a post/page in the classic editor instead of the block editor.",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Michael Weichert",
+            "email": "mweichert@gmail.com"
+        }
+    ],
+    "require": {}
+}
