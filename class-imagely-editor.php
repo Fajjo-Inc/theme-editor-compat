@@ -1,6 +1,5 @@
 <?php
 require_once 'class-tgm-plugin-activation.php';
-require_once 'class-imagely-editor-pure-helpers.php';
 
 if (!class_exists('Imagely_Editor')) {
 
