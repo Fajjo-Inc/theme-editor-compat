@@ -40,8 +40,8 @@ class Loader
         // to not set any option at all as having it set to "no-replace" causes
         // problems.
         //
-        if (class_exists('Classic_Editor')) {
-            $klass = new ReflectionClass('Classic_Editor');
+        if (class_exists('\Classic_Editor')) {
+            $klass = new \ReflectionClass('\Classic_Editor');
             $version = $klass->getConstant('plugin_version');
             if (version_compare($version, "0.5") > 0 && get_option('classic-editor-replace') == 'no-replace') {
                 update_option('classic-editor-replace', 'block');
