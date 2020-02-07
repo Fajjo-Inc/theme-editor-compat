@@ -6,6 +6,16 @@ require_once 'lib/class-tgm-plugin-activation.php';
 
 class Loader
 {
+    protected static $_instance = NULL;
+    public static function get_instance()
+    {
+        if (!isset(self::$_instance)) {
+            $klass = get_called_class();
+            self::$_instance = new $klass;
+        }
+        return self::$_instance;
+    }
+
     /**
      * @var Helpers $pure
      */
